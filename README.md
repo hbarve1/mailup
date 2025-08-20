@@ -16,6 +16,10 @@
 - **📧 Multi-provider support:** Gmail, Outlook, Yahoo, and custom IMAP/SMTP accounts
 - **⚡ Offline-first:** Access and compose emails even without an internet connection
 
+## Screenshots
+
+![Screenshot 1](./desktop/assets/screenshot-1.png)
+
 ## 🚀 Quick Start
 
 ### Prerequisites
