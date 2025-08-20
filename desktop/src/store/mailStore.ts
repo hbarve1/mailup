@@ -40,6 +40,9 @@ interface MailState {
   conversations: Conversation[];
   messages: Message[];
   currentUserId: string;
+  selectedIntegrationId: string | null;
+  setSelectedIntegration: (id: string) => void;
+  setCurrentUserId: (id: string) => void;
   addMessage: (msg: Message) => void;
 }
 
@@ -55,6 +58,7 @@ const sampleUsers: User[] = [
   { id: 'u1', name: 'Alice', email: 'alice@gmail.com', avatar: 'https://i.pravatar.cc/150?img=1' },
   { id: 'u2', name: 'Bob', email: 'bob@outlook.com', avatar: 'https://i.pravatar.cc/150?img=2' },
   { id: 'u3', name: 'Charlie', email: 'charlie@yahoo.com', avatar: 'https://i.pravatar.cc/150?img=3' },
+  { id: 'u4', name: 'David', email: 'david@hotmail.com', avatar: 'https://i.pravatar.cc/150?img=4' }
 ];
 
 const sampleConversations: Conversation[] = [
@@ -77,6 +81,14 @@ export const useMailStore = create<MailState>((set, get) => ({
   conversations: sampleConversations,
   messages: sampleMessages,
   currentUserId: sampleUsers[0].id, // Assume Alice is logged in
+  selectedIntegrationId: null,
+  setSelectedIntegration: (id: string) => {
+    set({ selectedIntegrationId: id });
+    // Set current user to the first user with this integration
+    const user = get().users.find((u) => u.email.toLowerCase().includes(id));
+    if (user) set({ currentUserId: user.id });
+  },
+  setCurrentUserId: (id: string) => set({ currentUserId: id }),
   addMessage: (msg: Message) =>
     set((state) => ({
       messages: [...state.messages, msg],
