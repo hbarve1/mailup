@@ -1,14 +1,13 @@
 import './App.css';
 import { useState } from 'react';
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-} from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Sidebar from './components/Sidebar/Sidebar';
 import ChatWindow from './components/ChatWindow/ChatWindow';
 import AppHeader from './components/AppHeader';
+import SignInPage from './pages/SignInPage';
+import NotFoundPage from './pages/NotFoundPage';
+import ErrorPage from './pages/ErrorPage';
 
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -22,7 +21,9 @@ function App() {
             <main className="flex-1 relative flex flex-col">
               <Routes>
                 <Route path="/" element={<ChatWindow />} />
-                {/* Add more routes here as needed */}
+                <Route path="/signin" element={<SignInPage />} />
+                <Route path="/error" element={<ErrorPage />} />
+                <Route path="*" element={<NotFoundPage />} />
               </Routes>
             </main>
           </div>
