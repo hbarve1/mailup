@@ -1,56 +1,25 @@
-import './App.css';
 import { useState } from 'react';
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
-
-import Sidebar from './components/Sidebar/Sidebar';
-import ChatWindow from './components/ChatWindow/ChatWindow';
-import AppHeader from './components/AppHeader';
-import SignInPage from './pages/SignInPage';
-import NotFoundPage from './pages/NotFoundPage';
-import ErrorPage from './pages/ErrorPage';
-import SettingsPage from './pages/SettingsPage';
-
-function MainLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-green-100 via-white to-blue-100 flex flex-col">
-      <AppHeader />
-      <div className="flex-1 flex items-center justify-center">
-        <div className="relative flex w-full max-w-6xl h-[90vh] rounded-2xl shadow-2xl overflow-hidden border border-gray-200 bg-white/90">
-          {children}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function ChatRoute({ sidebarOpen, setSidebarOpen }: { sidebarOpen: boolean; setSidebarOpen: (open: boolean) => void }) {
-  return (
-    <>
-      <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-      <main className="flex-1 relative flex flex-col">
-        <ChatWindow />
-      </main>
-    </>
-  );
-}
+import Sidebar from './components/Sidebar';
+import ChatView from './components/ChatView';
+import { ThemeProvider } from './context/ThemeContext';
+import { MailProvider } from './context/MailContext';
+import './App.css';
 
 function App() {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [selectedConversation, setSelectedConversation] = useState<string | null>('1');
+
   return (
-    <Router>
-      <MainLayout>
-        <Routes>
-          <Route
-            path="/"
-            element={<ChatRoute sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />}
+    <ThemeProvider>
+      <MailProvider>
+        <div className="flex h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
+          <Sidebar 
+            selectedConversation={selectedConversation}
+            onConversationSelect={setSelectedConversation}
           />
-          <Route path="/signin" element={<main className="flex-1 relative flex flex-col"><SignInPage /></main>} />
-          <Route path="/settings" element={<main className="flex-1 relative flex flex-col"><SettingsPage /></main>} />
-          <Route path="/error" element={<main className="flex-1 relative flex flex-col"><ErrorPage /></main>} />
-          <Route path="*" element={<main className="flex-1 relative flex flex-col"><NotFoundPage /></main>} />
-        </Routes>
-      </MainLayout>
-    </Router>
+          <ChatView conversationId={selectedConversation} />
+        </div>
+      </MailProvider>
+    </ThemeProvider>
   );
 }
 

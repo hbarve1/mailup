@@ -3,12 +3,10 @@ import { Send, Paperclip, Smile, Bold, Italic, Underline } from 'lucide-react';
 import QuickReplies from './QuickReplies';
 
 interface ReplyBoxProps {
-  // conversationId: string;
+  conversationId: string;
 }
 
-const ReplyBox: React.FC<ReplyBoxProps> = ({ 
-  // conversationId 
-}) => {
+const ReplyBox: React.FC<ReplyBoxProps> = ({ conversationId }) => {
   const [message, setMessage] = useState('');
   const [showFormatting, setShowFormatting] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);

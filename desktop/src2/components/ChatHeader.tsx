@@ -1,6 +1,6 @@
 import React from 'react';
 import { Search, Pin, VolumeX, Archive, MoreHorizontal, Phone, Video } from 'lucide-react';
-import type { Conversation } from '../types/index';
+import type { Conversation } from '../types';
 
 interface ChatHeaderProps {
   conversation: Conversation;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Pin, VolumeX, Paperclip } from 'lucide-react';
-import type { Conversation } from '../types/index';
+import type { Conversation } from '../types';
 
 interface ConversationItemProps {
   conversation: Conversation;

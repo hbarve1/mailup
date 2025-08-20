@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Search, Plus, Settings, Moon, Sun } from 'lucide-react';
-import { useTheme } from '../context/ThemeContext';
-import { useMail } from '../context/MailContext';
+import { Search, Plus, Settings, Moon, Sun, Pin, VolumeX } from 'lucide-react';
+import { useTheme } from '../contexts/ThemeContext';
+import { useMail } from '../contexts/MailContext';
 import AccountSwitcher from './AccountSwitcher';
 import ConversationItem from './ConversationItem';
 
@@ -12,7 +12,7 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ selectedConversation, onConversationSelect }) => {
   const { theme, toggleTheme } = useTheme();
-  const { conversations } = useMail();
+  const { conversations, accounts, currentAccount } = useMail();
   const [searchQuery, setSearchQuery] = useState('');
 
   const filteredConversations = conversations.filter(conv =>

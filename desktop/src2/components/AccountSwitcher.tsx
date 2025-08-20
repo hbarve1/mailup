@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ChevronDown, Mail } from 'lucide-react';
-import { useMail } from '../context/MailContext';
+import { useMail } from '../contexts/MailContext';
 
 const AccountSwitcher: React.FC = () => {
   const { accounts, currentAccount, switchAccount } = useMail();

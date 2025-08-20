@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Download, FileText, Image, Eye, Reply, Forward } from 'lucide-react';
-import type { Message, Attachment } from '../types/index';
+import type { Message, Attachment } from '../types';
 
 interface MessageBubbleProps {
   message: Message;

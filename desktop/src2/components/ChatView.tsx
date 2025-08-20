@@ -1,5 +1,5 @@
 import React from 'react';
-import { useMail } from '../context/MailContext';
+import { useMail } from '../contexts/MailContext';
 import ChatHeader from './ChatHeader';
 import MessageList from './MessageList';
 import ReplyBox from './ReplyBox';
@@ -50,9 +50,7 @@ const ChatView: React.FC<ChatViewProps> = ({ conversationId }) => {
     <div className="flex-1 flex flex-col bg-gray-50 dark:bg-gray-900">
       <ChatHeader conversation={conversation} />
       <MessageList messages={conversationMessages} />
-      <ReplyBox 
-      // conversationId={conversationId} 
-      />
+      <ReplyBox conversationId={conversationId} />
     </div>
   );
 };
