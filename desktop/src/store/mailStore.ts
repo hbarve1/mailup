@@ -39,6 +39,8 @@ interface MailState {
   users: User[];
   conversations: Conversation[];
   messages: Message[];
+  currentUserId: string;
+  addMessage: (msg: Message) => void;
 }
 
 // Sample data
@@ -69,9 +71,14 @@ const sampleMessages: Message[] = [
   { id: 'm5', conversationId: 'c3', senderId: 'u1', content: 'Don’t forget the snacks!', timestamp: '2025-08-20T11:00:00Z' },
 ];
 
-export const useMailStore = create<MailState>(() => ({
+export const useMailStore = create<MailState>((set, get) => ({
   integrations: sampleIntegrations,
   users: sampleUsers,
   conversations: sampleConversations,
   messages: sampleMessages,
+  currentUserId: sampleUsers[0].id, // Assume Alice is logged in
+  addMessage: (msg: Message) =>
+    set((state) => ({
+      messages: [...state.messages, msg],
+    })),
 }));
