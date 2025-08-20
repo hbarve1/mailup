@@ -1,13 +1,17 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import { useMailStore } from '../store/mailStore';
+import { useNavigate } from 'react-router-dom';
 
 const AppHeader: React.FC = () => {
+
   const currentUserId = useMailStore((state) => state.currentUserId);
   const user = useMailStore((state) => state.users.find(u => u.id === currentUserId));
   const integrations = useMailStore((state) => state.integrations);
   const users = useMailStore((state) => state.users);
   const setSelectedIntegration = useMailStore((state) => state.setSelectedIntegration);
   const setCurrentUserId = useMailStore((state) => state.setCurrentUserId);
+  const navigate = useNavigate();
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -34,7 +38,16 @@ const AppHeader: React.FC = () => {
 
   return (
     <header className="w-full flex items-center justify-between px-8 py-4 bg-white/80 border-b border-gray-200 shadow-sm z-40">
-      <span className="text-2xl font-bold text-green-700 tracking-tight">MailUp</span>
+      <span
+        className="text-2xl font-bold text-green-700 tracking-tight cursor-pointer select-none"
+        onClick={() => navigate('/')}
+        tabIndex={0}
+        role="button"
+        aria-label="Go to Home"
+        onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') navigate('/'); }}
+      >
+        MailUp
+      </span>
       {user && (
         <div className="relative" ref={dropdownRef}>
           <button
@@ -51,7 +64,15 @@ const AppHeader: React.FC = () => {
           {dropdownOpen && (
             <div className="absolute right-0 mt-2 w-64 bg-white border border-gray-200 rounded-lg shadow-lg z-50 p-2">
               <div className="px-3 py-2 border-b border-gray-100 text-xs text-gray-500 font-semibold">Account</div>
-              <div className="px-3 py-2 hover:bg-gray-50 rounded cursor-pointer text-sm" onClick={() => { setDropdownOpen(false); alert('Settings coming soon!'); }}>Settings</div>
+              <div
+                className="px-3 py-2 hover:bg-gray-50 rounded cursor-pointer text-sm"
+                onClick={() => {
+                  setDropdownOpen(false);
+                  navigate('/settings');
+                }}
+              >
+                Settings
+              </div>
               <div className="px-3 py-2 border-b border-gray-100 text-xs text-gray-500 font-semibold">Switch Account</div>
               {accountsByIntegration.map(integration => (
                 <div key={integration.id} className="mb-1">

@@ -8,6 +8,7 @@ import AppHeader from './components/AppHeader';
 import SignInPage from './pages/SignInPage';
 import NotFoundPage from './pages/NotFoundPage';
 import ErrorPage from './pages/ErrorPage';
+import SettingsPage from './pages/SettingsPage';
 
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -17,15 +18,24 @@ function App() {
         <AppHeader />
         <div className="flex-1 flex items-center justify-center">
           <div className="relative flex w-full max-w-6xl h-[90vh] rounded-2xl shadow-2xl overflow-hidden border border-gray-200 bg-white/90">
-            <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-            <main className="flex-1 relative flex flex-col">
-              <Routes>
-                <Route path="/" element={<ChatWindow />} />
-                <Route path="/signin" element={<SignInPage />} />
-                <Route path="/error" element={<ErrorPage />} />
-                <Route path="*" element={<NotFoundPage />} />
-              </Routes>
-            </main>
+            {/* Only show Sidebar on ChatWindow route */}
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <>
+                    <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+                    <main className="flex-1 relative flex flex-col">
+                      <ChatWindow />
+                    </main>
+                  </>
+                }
+              />
+              <Route path="/signin" element={<main className="flex-1 relative flex flex-col"><SignInPage /></main>} />
+              <Route path="/settings" element={<main className="flex-1 relative flex flex-col"><SettingsPage /></main>} />
+              <Route path="/error" element={<main className="flex-1 relative flex flex-col"><ErrorPage /></main>} />
+              <Route path="*" element={<main className="flex-1 relative flex flex-col"><NotFoundPage /></main>} />
+            </Routes>
           </div>
         </div>
       </div>
