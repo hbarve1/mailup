@@ -1,7 +1,6 @@
 import React from 'react';
 
-import MailIntegrationList from './MailIntegrationList';
-import { useMailStore } from '../../store/mailStore';
+import ConversationList from '../ChatWindow/ConversationList';
 
 
 interface SidebarProps {
@@ -10,8 +9,6 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ open, onClose }) => {
-  const currentUserId = useMailStore((state) => state.currentUserId);
-  const user = useMailStore((state) => state.users.find(u => u.id === currentUserId));
   return (
     <aside
       className={`sidebar fixed md:static z-30 bg-white border-r border-gray-200 w-64 h-full flex flex-col shadow-sm transition-transform duration-300 ${open ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0`}
@@ -24,16 +21,9 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose }) => {
       >
         ×
       </button>
-      {user && (
-        <div className="flex items-center gap-3 p-4 border-b border-gray-100">
-          <img src={user.avatar} alt={user.name} className="w-10 h-10 rounded-full object-cover" />
-          <div>
-            <div className="font-semibold text-gray-800">{user.name}</div>
-            <div className="text-xs text-gray-500">{user.email}</div>
-          </div>
-        </div>
-      )}
-      <MailIntegrationList />
+      <div className="flex-1 overflow-y-auto">
+        <ConversationList />
+      </div>
     </aside>
   );
 };

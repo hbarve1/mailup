@@ -1,6 +1,5 @@
 import React from 'react';
 
-import ConversationList from './ConversationList';
 import MessageList from '../MessageList/MessageList';
 import MessageInput from '../MessageInput/MessageInput';
 import { useMailStore } from '../../store/mailStore';
@@ -14,11 +13,7 @@ const ChatWindow: React.FC = () => {
   const participant = selectedConversation ? users.find(u => u.id === selectedConversation.participants.find(pid => pid !== users[0].id)) : null;
 
   return (
-    <section className="chat-window flex flex-row w-full h-full">
-      {/* Conversation list sidebar */}
-      <aside className="w-80 border-r border-gray-200 bg-white h-full overflow-y-auto hidden md:block">
-        <ConversationList />
-      </aside>
+    <section className="chat-window flex flex-col w-full h-full">
       {/* Main chat area */}
       <div className="flex-1 flex flex-col h-full bg-chat bg-cover bg-no-repeat relative">
         {/* Chat header */}
