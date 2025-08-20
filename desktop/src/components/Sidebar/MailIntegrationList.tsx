@@ -6,7 +6,7 @@ const MailIntegrationList: React.FC = () => {
   const selectedIntegrationId = useMailStore((state) => state.selectedIntegrationId);
   const setSelectedIntegration = useMailStore((state) => state.setSelectedIntegration);
   const users = useMailStore((state) => state.users);
-  const currentUserId = useMailStore((state) => state.currentUserId);
+  // const currentUserId = useMailStore((state) => state.currentUserId);
   // For demo, show the first user with the selected integration as the active account
   const activeAccount = selectedIntegrationId
     ? users.find(

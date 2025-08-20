@@ -4,11 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "start": "electron ./backend/index.cjs",
+    "dev": "npm run build -- --watch",
+    "dev2": "electron ./backend/index.cjs",
     "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "lint": "eslint ."
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.12",
