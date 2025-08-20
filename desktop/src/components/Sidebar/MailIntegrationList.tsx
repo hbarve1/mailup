@@ -1,19 +1,13 @@
-import React from 'react';
 
-// Example mail integrations, replace with dynamic data as needed
-const mailIntegrations = [
-  { id: 'gmail', name: 'Gmail', icon: '📧' },
-  { id: 'outlook', name: 'Outlook', icon: '📨' },
-  { id: 'yahoo', name: 'Yahoo', icon: '✉️' },
-  // Add more integrations here
-];
+import { useMailStore } from '../../store/mailStore';
 
 const MailIntegrationList: React.FC = () => {
+  const integrations = useMailStore((state) => state.integrations);
   return (
     <div className="mail-integration-list p-4">
       <h3 className="text-lg font-semibold mb-4 text-gray-700">Mail Integrations</h3>
       <ul className="space-y-2">
-        {mailIntegrations.map((integration) => (
+        {integrations.map((integration) => (
           <li
             key={integration.id}
             className="integration-item flex items-center gap-3 p-2 rounded-lg hover:bg-gray-100 cursor-pointer transition"
